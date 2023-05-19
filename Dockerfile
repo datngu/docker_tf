@@ -29,9 +29,9 @@ RUN apt-get update && apt-get install -y \
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN conda create -n base python=3.10
+#RUN conda create -n base python=3.10
 
-RUN conda install -n base -c conda-forge numpy==1.23.2 pandas==2.0.1
+RUN conda install -n base -c conda-forge python=3.10 numpy==1.23.2 pandas==2.0.1 pip
 
 RUN conda install -n base -c bioconda pysam samtools bedtools -y
 
