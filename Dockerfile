@@ -14,27 +14,28 @@ RUN apt-get -qq update && apt-get -qq -y install curl bzip2 \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log \
     && conda clean --all --yes
 
-RUN apt-get update && apt-get install -y \
-    make \
-    gcc \
-    wget \
-    git \
-    tar \
-    libz-dev \
-    liblapack-dev \
-    libgsl-dev \
-    tabix \
-    build-essential \
-    bcftools
-
 ENV PATH /opt/conda/bin:$PATH
 
+# RUN apt-get update && apt-get install -y \
+#     make \
+#     gcc \
+#     wget \
+#     git \
+#     tar \
+#     libz-dev \
+#     liblapack-dev \
+#     libgsl-dev \
+#     tabix \
+#     build-essential \
+#     bcftools
+
+
+
 #RUN conda create -n base python=3.10
+RUN conda install mamba -n base -c conda-forge -y
 
-RUN conda install -n base -c conda-forge python=3.10 numpy==1.23.2 pandas==2.0.1 pip
+RUN conda config --add channels conda-forge bioconda
 
-RUN conda install -n base -c bioconda pysam samtools bedtools -y
+RUN mamba install -n base python=3.10 numpy==1.23.2 pandas==2.0.1 pysam samtools bedtools pip -y
 
-ENV PATH /opt/conda/envs/base/bin:$PATH
-
-RUN python3 -m pip install tensorflow==2.12.0
+RUN pip install tensorflow==2.12.0
