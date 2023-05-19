@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-runtime-ubuntu20.04
+FROM tensorflow/tensorflow:2.12.0-gpu-jupyter
 
 LABEL maintainer="Dat T Nguyen <ndat@utexas.edu"
 
@@ -39,4 +39,4 @@ RUN conda config --append channels bioconda
 RUN conda install mamba -n base -c conda-forge -y
 RUN mamba install -n base numpy==1.23.2 pandas==2.0.1 pysam samtools bedtools pip -y
 
-RUN pip install tensorflow==2.12.0
+#RUN pip install tensorflow==2.12.0
