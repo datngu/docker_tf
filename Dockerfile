@@ -32,10 +32,11 @@ ENV PATH /opt/conda/bin:$PATH
 
 
 #RUN conda create -n base python=3.10
+
+RUN conda config --append channels conda-forge
+RUN conda config --append channels bioconda
+
 RUN conda install mamba -n base -c conda-forge -y
-
-RUN conda config --add channels conda-forge bioconda
-
 RUN mamba install -n base numpy==1.23.2 pandas==2.0.1 pysam samtools bedtools pip -y
 
 RUN pip install tensorflow==2.12.0
