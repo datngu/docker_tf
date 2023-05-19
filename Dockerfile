@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y \
     samtools \
     bedtools \
     bcftools \
-    bwa
+    bwa \
+    python-pysam
 
 
 
