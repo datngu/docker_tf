@@ -8,7 +8,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 
 RUN apt-get update && apt-get install -y 
-RUN apt-get install nvidia-driver-450 -y
+RUN apt install nvidia-driver-450 -y
 
 RUN conda install -n base -c conda-forge numpy pandas cudatoolkit=11.8.0 -y
 RUN conda install -n base -c bioconda pysam samtools bedtools -y
