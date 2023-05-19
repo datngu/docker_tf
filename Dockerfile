@@ -4,7 +4,7 @@ LABEL maintainer="Dat T Nguyen <ndat@utexas.edu"
 
 ADD requirements.txt /
 
-RUN pip install -r requirements.txt
+RUN pip install -r /requirements.txt
 
 
 RUN apt-get update && apt-get install -y \
