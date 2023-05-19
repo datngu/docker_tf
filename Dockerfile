@@ -8,7 +8,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 
 RUN apt-get update && apt-get install -y 
- 
+RUN apt-get install nvidia-driver-450 -y
 
 RUN conda install -n base -c conda-forge numpy pandas cudatoolkit=11.8.0 -y
 RUN conda install -n base -c bioconda pysam samtools bedtools -y
@@ -23,9 +23,12 @@ RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH
 #RUN source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 SHELL ["/bin/bash", "-c", "source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh"]
 
-ENV CUDNN_PATH $(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))
-ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
+#ENV CUDNN_PATH $(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))
+#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
 
 ## Verify install:
 ## python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
 ENV PATH /opt/conda/envs/env/bin:$PATH
+
+
+# # singularity build ndatth-deepsea-v0.0.0.img docker://ndatth/deepsea:v0.0.0
