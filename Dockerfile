@@ -14,7 +14,7 @@ RUN conda install -n base -c conda-forge numpy pandas cudatoolkit=11.8.0 -y
 RUN conda install -n base -c bioconda pysam samtools bedtools -y
 
 RUN python3 -m pip install nvidia-cudnn-cu11==8.6.0.163 tensorflow==2.12.0
-RUN pip install nvidia-tensorrt
+#RUN pip install nvidia-tensorrt
 
 RUN mkdir -p $CONDA_PREFIX/etc/conda/activate.d
 
