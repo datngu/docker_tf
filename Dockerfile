@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.12.0-gpu-jupyter
+FROM tensorflow/tensorflow:2.10.1-gpu
 
 LABEL maintainer="Dat T Nguyen <ndat@utexas.edu"
 
