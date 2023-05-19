@@ -150,8 +150,6 @@ RUN ${PIP} install --no-cache-dir -U \
     requests==2.22.0 \
     awscli \
     mpi4py==3.0.3 \
-    pysam==0.21.0 \
-    biopython \
     opencv-python==4.2.0.32 \
     sagemaker==1.50.17 \
     sagemaker-experiments==0.1.7 \
