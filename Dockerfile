@@ -1,0 +1,25 @@
+FROM nfcore/base:2.1
+
+LABEL authors="Dat T Nguyen - ndat<at>utexas.edu" \
+      description="Docker image containing all requirements for running deep learning models" 
+
+ENV TZ='Europe/Oslo'
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+
+RUN apt-get update && apt-get install -y 
+ 
+
+RUN conda install -n base -c conda-forge numpy pandas cudatoolkit=11.8.0 -y
+RUN conda install -n base -c bioconda pysam samtools bedtools -y
+
+RUN python3 -m pip install nvidia-cudnn-cu11==8.6.0.163 tensorflow==2.12.0
+
+RUN mkdir -p $CONDA_PREFIX/etc/conda/activate.d
+
+RUN echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+RUN source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+## Verify install:
+## python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+ENV PATH /opt/conda/envs/env/bin:$PATH
