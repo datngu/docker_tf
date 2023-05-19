@@ -3,7 +3,7 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
 LABEL maintainer="Dat T Nguyen <ndat@utexas.edu"
 
 RUN apt-get -qq update && apt-get -qq -y install curl bzip2 \
-    && curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
+    && curl -sSL https://repo.anaconda.com/miniconda/Miniconda3-py310_23.3.1-0-Linux-x86_64.sh -o /tmp/miniconda.sh \
     && bash /tmp/miniconda.sh -bfp /usr/local \
     && rm -rf /tmp/miniconda.sh \
     && conda install -y python=3 \
@@ -36,6 +36,6 @@ RUN conda install mamba -n base -c conda-forge -y
 
 RUN conda config --add channels conda-forge bioconda
 
-RUN mamba install -n base python=3.10 numpy==1.23.2 pandas==2.0.1 pysam samtools bedtools pip -y
+RUN mamba install -n base numpy==1.23.2 pandas==2.0.1 pysam samtools bedtools pip -y
 
 RUN pip install tensorflow==2.12.0
